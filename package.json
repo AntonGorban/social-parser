@@ -4,7 +4,7 @@
   "description": "Shows the metric of site visits and metrics from VK, Telegram, YouTube, Ok, Instagram and Twitter",
   "main": "app.js",
   "scripts": {
-    "start": "npm run app.js"
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
