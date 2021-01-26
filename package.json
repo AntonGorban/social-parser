@@ -1,0 +1,28 @@
+{
+  "name": "social-parser",
+  "version": "1.0.0",
+  "description": "Shows the metric of site visits and metrics from VK, Telegram, YouTube, Ok, Instagram and Twitter",
+  "main": "app.js",
+  "scripts": {
+    "start": "npm run app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonGorban/social-parser.git"
+  },
+  "author": "Anton Gorban",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AntonGorban/ministry-information-parser/issues"
+  },
+  "homepage": "https://github.com/AntonGorban/ministry-information-parser#readme",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "easyvk": "^2.8.2",
+    "fs-extra": "^9.1.0",
+    "googleapis": "^67.0.0",
+    "instagram-web-api": "^2.2.2",
+    "jsdom": "^16.4.0",
+    "node-telegram-bot-api": "^0.51.0"
+  }
+}
