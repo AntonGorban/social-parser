@@ -5,18 +5,18 @@ Languages: [EN](https://github.com/AntonGorban/social-parser/blob/main/README.md
 > Shows the metric of site visits and metrics from VKontakte, Telegram, YouTube, Odnoklassniki, Instagram and Twitter.
 
 - [social-parser](#social-parser)
-	- [Getting started](#getting-started)
-		- [Installing](#installing)
-		- [APIs](#apis)
-			- [VK](#vk)
-				- [Text instruction](#text-instruction)
-				- [Images instruction](#images-instruction)
-			- [Telegram](#telegram)
-			- [YouTube](#youtube)
-				- [Text instruction](#text-instruction-1)
-				- [Images instruction](#images-instruction-1)
-			- [Instagram](#instagram)
-		- [Resourses](#resourses)
+  - [Getting started](#getting-started)
+    - [Installing](#installing)
+    - [APIs](#apis)
+      - [VK](#vk)
+        - [Text instruction](#text-instruction)
+        - [Images instruction](#images-instruction)
+      - [Telegram](#telegram)
+      - [YouTube](#youtube)
+        - [Text instruction](#text-instruction-1)
+        - [Images instruction](#images-instruction-1)
+      - [Instagram](#instagram)
+    - [Resourses](#resourses)
 
 ## Getting started
 
@@ -105,7 +105,7 @@ You need a token `YouTube Data API v3`.To get it, go to [site](https://console.d
 - Where to call: `Web server (e.g. node.js, Tomcat)`
 - Data: `Public data`
 
-Confirm and you will receive your token.it needs to be inserted with the value of the `tg` key in `api.json`.
+Confirm and you will receive your token.it needs to be inserted with the value of the `youTube` key in `api.json`.
 
 ```json
 {
