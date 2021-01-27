@@ -1,5 +1,6 @@
 /* jshint esversion: 9 */
 const axios = require('axios');
+const path = require('path');
 const jsdom = require("jsdom");
 const {
 	JSDOM
@@ -11,10 +12,9 @@ const {
 	google
 } = require('googleapis');
 
-
-const resources = require('./json/resources.json');
-const settings = require('./json/settings.json');
-const api = require('./json/api.json');
+const resources = require(`${__dirname}/json/resources.json`);
+const settings = require(`${__dirname}/json/settings.json`);
+const api = require(`${__dirname}/json/api.json`);
 
 const tg = new tgBot(api.tg, {
 	polling: true
@@ -41,7 +41,19 @@ const data = {};
 for (let key in resources) {
 	data[key] = {
 		name: resources[key].name,
-		...settings.nullMetric
+		dayViews: null,
+		dayVisitors: null,
+		weekViews: null,
+		weekVisitors: null,
+		monthViews: null,
+		monthVisitors: null,
+		vk: null,
+		tg: null,
+		youTubeSubscribers: null,
+		youTubeViews: null,
+		ok: null,
+		inst: null,
+		tw: null
 	};
 }
 const strToInt = str => Number(`${str}`.replace(/\D/g, ''));
@@ -129,8 +141,11 @@ const parseInst = (resource, data) => {
 		.catch(error => console.error(error));
 };
 
+let out = document.querySelector('#out');
+
 function render() {
 	console.table(data);
+	out.innerHTML = data;
 }
 
 function startParsing() {
@@ -144,3 +159,7 @@ function startParsing() {
 		if (resources[key].tw) parse(`${settings.tw}${resources[key].tw}`, parseTw, data[key]);
 	}
 }
+
+let btn = document.querySelector('#btn');
+btn.addEventListener("click", () => startParsing());
+// console.log(document.querySelector('#btn'));
