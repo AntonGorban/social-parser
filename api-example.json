@@ -1,9 +1,0 @@
-{
-	"vk": "tokenVkAPI",
-	"tg": "tokenTelegramBot",
-	"youTube": "tokenYouTubeDataAPIv3",
-	"inst": {
-		"login": "instagramLogin",
-		"password": "instagramPassword"
-	}
-}

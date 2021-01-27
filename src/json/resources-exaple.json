@@ -1,0 +1,24 @@
+{
+	"resource1": {
+		"name": "resourceName",
+		"url": "https://resourceUrl",
+		"metricUrl": "resourceUrl",
+		"vk": "vkId",
+		"tg": "@telegramId",
+		"youTube": "youTubeChanelId",
+		"ok": null,
+		"inst": null,
+		"tw": null
+	},
+	"resource2": {
+		"name": "resourceName",
+		"url": "https://resourceUrl",
+		"metricUrl": "resourceUrl",
+		"vk": "vkId",
+		"tg": "@telegramId",
+		"youTube": null,
+		"ok": "okGroupId",
+		"inst": "instagramUserId",
+		"tw": "twitterUserId"
+	}
+}

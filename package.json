@@ -1,22 +1,63 @@
 {
   "name": "social-parser",
+  "productName": "social-parser",
   "version": "1.0.0",
   "description": "Shows the metric of site visits and metrics from VK, Telegram, YouTube, Ok, Instagram and Twitter",
-  "main": "app.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node app.js"
+    "console": "node app.js",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint src --color"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AntonGorban/social-parser.git"
   },
+  "keywords": [],
   "author": "Anton Gorban",
   "license": "MIT",
+  "config": {
+    "forge": {
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm"
+      },
+      "electronWinstallerConfig": {
+        "name": "social_parser"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "",
+        "name": ""
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "socialparser"
+      }
+    }
+  },
   "bugs": {
     "url": "https://github.com/AntonGorban/ministry-information-parser/issues"
   },
   "homepage": "https://github.com/AntonGorban/ministry-information-parser#readme",
   "dependencies": {
+    "electron-compile": "^6.4.4",
+    "electron-squirrel-startup": "^1.0.0",
     "axios": "^0.21.1",
     "easyvk": "^2.8.2",
     "fs-extra": "^9.1.0",
@@ -24,5 +65,17 @@
     "instagram-web-api": "^2.2.2",
     "jsdom": "^16.4.0",
     "node-telegram-bot-api": "^0.51.0"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.4",
+    "electron-prebuilt-compile": "8.2.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.22.0"
   }
 }
