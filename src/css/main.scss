@@ -1,0 +1,276 @@
+$black: #1d1d1d;
+$light_black: #4d4d4d;
+$white: #f4f4f4;
+$dark_white: #f4f4f4;
+$maxWidth: 1280;
+
+@mixin adaptiv-font($pcSize, $mobSize) {
+	$addSize: $pcSize - $mobSize;
+	$maxWidth: $maxWidth - 320;
+	font-size: calc(#{$mobSize + px} + #{$addSize} * ((100vw - 320px) / #{$maxWidth}));
+}
+
+#preloader {
+	position: fixed;
+	left: 0;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	background: $black;
+	z-index: 999999;
+	transition: opacity .5s ease;
+
+	&.loaded_hiding {
+		opacity: 0;
+	}
+
+	&.loaded {
+		display: none;
+	}
+
+	.preloader__item {
+		display: block;
+		position: relative;
+		top: 50%;
+		left: 50%;
+		width: 150px;
+		height: 150px;
+		transform: translate(-50%, -50%);
+		background: $black;
+		animation: preloader 2s infinite linear;
+
+		@keyframes preloader {
+			0% {
+				// margin-top: -50px;
+				transform: translate(-50%, -50%) rotate(0deg);
+			}
+
+			100% {
+				// margin-top: -50px;
+				transform: translate(-50%, -50%) rotate(360deg);
+			}
+		}
+
+		&:before,
+		&:after {
+			content: '';
+			display: block;
+			height: 0;
+			width: 0;
+			background: $dark_white;
+			animation: preloader__item 2s infinite linear;
+			border-radius: 50%;
+			position: absolute;
+			top: 25%;
+			left: 20%;
+
+			transform: translate(-50%, -50%);
+
+			@keyframes preloader__item {
+				0% {
+					height: 0;
+					width: 0;
+				}
+
+				20% {
+					height: 0;
+					width: 0;
+				}
+
+				45% {
+					height: 25%;
+					width: 25%;
+				}
+
+				50% {
+					height: 25%;
+					width: 25%;
+				}
+
+				55% {
+					height: 25%;
+					width: 25%;
+				}
+
+				80% {
+					height: 0;
+					width: 0;
+				}
+
+				100% {
+					height: 0;
+					width: 0;
+				}
+			}
+		}
+
+		&:after {
+			top: 75%;
+			animation-delay: .5s;
+		}
+
+		&:before {}
+	}
+
+}
+
+
+
+
+
+body {
+	box-sizing: border-box;
+	overflow-x: hidden;
+	padding: 10px;
+	font-family: 'Montserrat', sans-serif;
+	background: $black;
+	color: $white;
+	width: 100%;
+	min-height: 100vh;
+}
+
+a {
+	color: $white;
+}
+
+#menu {
+	height: 125px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+
+	#about {
+		h1 {
+			margin: 0;
+			font-size: 35px;
+			text-transform: uppercase;
+			font-weight: 600;
+		}
+
+		.created {
+			margin-top: 15px;
+			color: $light_black;
+			display: flex;
+			justify-content: space-evenly;
+			align-items: flex-end;
+			font-weight: 400;
+
+			.created__intro {
+				font-size: 20px;
+			}
+
+			.created__outro a {
+				font-size: 25px;
+				padding-left: 10px;
+				text-decoration: none;
+				color: $light_black;
+				font-weight: 500;
+			}
+		}
+	}
+
+	#func {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		button {
+			padding: 15px;
+			font-size: 17px;
+			background: $white;
+			color: $black;
+			border-radius: 15px;
+			border: none;
+			margin: 0 15px;
+			text-transform: uppercase;
+			font-weight: 600;
+			outline: none;
+			transition: transform .5s ease, border-radius .3s ease;
+
+			i {
+				font-size: 20px;
+				margin-right: 10px;
+			}
+
+			&:hover {
+				transform: scale(1.1);
+				border-radius: 20px;
+			}
+
+			&:active {
+				transform: scale(1.09);
+				border-radius: 25px;
+			}
+
+			&#excel {
+				background: #0C7238;
+				color: $white;
+			}
+		}
+	}
+
+}
+
+#main {
+	overflow-x: scroll;
+	// overflow-y: scroll;
+
+	table {
+		border-spacing: 0;
+		border-collapse: collapse;
+		overflow: hidden;
+
+		td {
+			text-align: center;
+			padding: 5px 5px;
+			border: 1px solid $white;
+			// font-size: 15px;
+			box-sizing: border-box;
+		}
+
+		thead {
+			text-transform: uppercase;
+			font-size: 20px;
+			font-weight: 600;
+		}
+
+		tbody {
+			td {
+				font-size: 14px;
+				font-weight: 400;
+			}
+		}
+
+	}
+}
+
+/* полоса прокрутки (скроллбар) */
+::-webkit-scrollbar {
+	width: 10px;
+	height: 9px;
+	background-color: $black;
+
+	/* ползунок скроллбара */
+	&-thumb {
+		background-color: $light_black;
+		border-radius: 10em;
+		box-shadow: inset 0 1px 2px 1px $black;
+
+		&:hover {
+			background-color: $dark_white;
+		}
+	}
+
+	&-button {
+
+		&:vertical,
+		&:horizontal {
+
+			&:start:decrement,
+			&:end:increment {
+				height: 0;
+				width: 0;
+			}
+		}
+	}
+}

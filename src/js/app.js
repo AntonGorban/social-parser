@@ -160,6 +160,4 @@ function startParsing() {
 	}
 }
 
-let btn = document.querySelector('#btn');
-btn.addEventListener("click", () => startParsing());
-// console.log(document.querySelector('#btn'));
+/* web-muzzle */

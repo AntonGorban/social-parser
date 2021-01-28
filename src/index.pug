@@ -1,0 +1,107 @@
+doctype html
+html
+	head
+		meta(charset="UTF-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0")
+		title social-parser
+		link(rel="preconnect" href="https://fonts.gstatic.com")
+		link(href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet")
+		link(rel="stylesheet" href="./css/normalize.css")
+		link(rel="stylesheet" href="./css/main.css")
+
+	body
+
+	div#preloader
+		div.preloader__item
+
+	section#menu
+		div#about
+			h1 social-parser
+			div.created
+				div.created__intro created by
+				div.created__outro
+					a(href="https://github.com/AntonGorban")
+						i.fab.fa-github
+						|AntonGorban
+		div#func
+			button#start
+				i.fas.fa-bolt
+				|Спарсить
+			button#excel
+				i.fas.fa-file-export
+				|Excel
+
+	section#main
+		table
+			thead
+				tr
+					td(rowspan="3") ресурс
+					td(colspan="6" title="метрика")
+						i.fa.fa-chart-line
+					td(rowspan="3" title="ВКонтакте")
+						i.fab.fa-vk
+					td(rowspan="3" title="Telegram")
+						i.fab.fa-telegram-plane
+					td(colspan="2" title="YouTube")
+						i.fab.fa-youtube
+					td(rowspan="3" title="Одноклассники")
+						i.fab.fa-odnoklassniki
+					td(rowspan="3" title="Instagram")
+						i.fab.fa-instagram
+					td(rowspan="3" title="Twitter")
+						i.fab.fa-twitter
+				tr
+					td(colspan="2" title="в день")
+						i.fas.fa-calendar-day
+					td(colspan="2" title="в неделю")
+						i.fas.fa-calendar-week
+					td(colspan="2" title="в месяц")
+						i.far.fa-calendar
+					td( rowspan="2" title="подписчиков")
+						i.fa.fa-users
+					td( rowspan="2" title="просмотров")
+						i.fa.fa-eye
+				tr
+					td(title="просмотров")
+						i.fa.fa-eye
+					td(title="посетителей")
+						i.fa.fa-users
+					td(title="просмотров")
+						i.fa.fa-eye
+					td(title="посетителей")
+						i.fa.fa-users
+					td(title="просмотров")
+						i.fa.fa-eye
+					td(title="посетителей")
+						i.fa.fa-users
+			tbody
+				tr#republicTv
+					td.name
+						a.name__link(href="https://google.com" target="_blank") Первый Республиканский
+					td.dayViews 999 999 999
+					td.dayVisitors 999 999 999
+					td.weekViews 999 999 999
+					td.weekVisitors 999 999 999
+					td.monthViews 999 999 999
+					td.monthVisitors 999 999 999
+					td.vk 999 999 999
+					td.tg 999 999 999
+					td.youTubeSubscribers 999 999 999
+					td.youTubeViews 999 999 999
+					td.ok 999 999 999
+					td.inst 999 999 999
+					td.tw 999 999 999
+
+	<script src="https://kit.fontawesome.com/5b524ce3d9.js" crossorigin="anonymous"></script>
+	script
+		|window.addEventListener('load',() => {
+		|	document.querySelector('#preloader').classList.add('loaded_hiding');
+		|	setTimeout(() => {
+		|		document.querySelector('#preloader').classList.add('loaded');
+		|		document.querySelector('#preloader').classList.remove('loaded_hiding');
+		|	}, 500);
+		|});
+	<script src="./js/app.js"></script>
+</body>
+
+</html>
