@@ -168,6 +168,18 @@ function startParsing() {
 const start = document.querySelector('#start');
 const table = document.querySelector('#main').querySelector('tbody');
 
+function render(resourceKey, dataKeys = []) {
+	dataKeys.forEach(key => {
+		// console.log(resourceKey, key, data[resourceKey][key]);
+		let cell = table.querySelector(`#${resourceKey}`).querySelector(`.${key}`);
+		cell.classList.add('hide');
+		setTimeout(() => {
+			cell.innerHTML = typeof (data[resourceKey][key]) === 'number' ? prettyNumber(data[resourceKey][key]) : data[resourceKey][key];
+			cell.classList.remove('hide');
+		}, 200);
+	});
+}
+
 window.addEventListener('DOMContentLoaded', () => {
 	const generateTable = () => {
 		for (let resourceKey in data) {
@@ -185,4 +197,8 @@ window.addEventListener('DOMContentLoaded', () => {
 		}
 	};
 	generateTable();
+
+	start.addEventListener('click', () => {
+		startParsing();
+	});
 });
