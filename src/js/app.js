@@ -34,7 +34,7 @@ inst.login({
 		password: api.inst.password
 	})
 	.then(log => console.log(`Instagram authenticated: ${log.authenticated}`))
-	.catch(error => console.error(error));
+	.catch(error => console.error('Instagram login error:', error));
 
 const data = {};
 
@@ -57,20 +57,21 @@ for (let key in resources) {
 	};
 }
 const strToInt = str => Number(`${str}`.replace(/\D/g, ''));
+const prettyNumber = str => `${str}`.split('').reverse().join('').replace(/(\d{3})/g, '$1 ').split('').reverse().join('').trim();
 
-async function parse(url, parseFunc, data) {
+async function parse(url, parseFunc, data, key) {
 	try {
 		let date = Date.now();
 		const response = await axios.get(url);
 		date = new Date((date + Date.now()) / 2);
 		data.date = `${date.getDate()}_${date.getMonth() + 1}_${date.getFullYear()} ${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}-${date.getMilliseconds()}`;
-		await parseFunc(new JSDOM(response.data).window.document.body, data);
+		await parseFunc(new JSDOM(response.data).window.document.body, data, key);
 	} catch (error) {
-		console.error(error);
+		console.error('parse error:', error);
 	}
 }
 
-const parseMetric = (html, data) => {
+const parseMetric = (html, data, key) => {
 	let table = html.querySelector('div#trafik').querySelector('.analysis-test__content').querySelector('tbody').children;
 	data.dayViews = strToInt(table[0].children[1].innerHTML);
 	data.dayVisitors = strToInt(table[1].children[1].innerHTML);
@@ -79,24 +80,31 @@ const parseMetric = (html, data) => {
 	data.monthViews = strToInt(table[0].children[3].innerHTML);
 	data.monthVisitors = strToInt(table[1].children[3].innerHTML);
 	if (settings.snapshots) fs.writeFile(`./snapshots/${data.date} metric - ${data.name}.html`, html.innerHTML);
-	render();
+	render(key, [
+		'dayViews',
+		'dayVisitors',
+		'weekViews',
+		'weekVisitors',
+		'monthViews',
+		'monthVisitors'
+	]);
 };
 
-const parseTw = (html, data) => {
+const parseTw = (html, data, key) => {
 	let members = html.querySelector('.table.table-bordered.table-condensed.dashed .col-xs-2');
 	data.tw = strToInt(members.innerHTML);
 	if (settings.snapshots) fs.writeFile(`./snapshots/${data.date} tw - ${data.name}.html`, html.innerHTML);
-	render();
+	render(key, ['tw']);
 };
 
-const parseOk = (html, data) => {
+const parseOk = (html, data, key) => {
 	let members = html.querySelector('#groupMembersCntEl');
 	data.ok = strToInt(members.innerHTML);
 	if (settings.snapshots) fs.writeFile(`./snapshots/${data.date} ok - ${data.name}.html`, html.innerHTML);
-	render();
+	render(key, ['ok']);
 };
 
-const parseVK = (resource, data) => {
+const parseVK = (resource, data, key) => {
 	easyvk({
 		// https://vkhost.github.io/
 		token: api.vk
@@ -106,58 +114,75 @@ const parseVK = (resource, data) => {
 			fields: 'members_count'
 		});
 		data.vk = response[0].members_count;
-		render();
-	}).catch(error => console.error(error));
+		render(key, ['vk']);
+	}).catch(error => console.error('VK error:', error));
 };
 
-const parseTG = (resource, data) => {
+const parseTG = (resource, data, key) => {
 	tg.getChatMembersCount(resource.tg)
 		.then(response => {
 			data.tg = response;
-			render();
+			render(key, ['tg']);
 		})
-		.catch(error => console.error(error));
+		.catch(error => console.error('Telegram error:', error));
 };
 
-const parseYouTube = (resource, data) => {
+const parseYouTube = (resource, data, key) => {
 	youTube.channels.list({
 		part: 'statistics',
 		id: resource.youTube
 	}).then(response => {
 		data.youTubeSubscribers = strToInt(response.data.items[0].statistics.subscriberCount);
 		data.youTubeViews = strToInt(response.data.items[0].statistics.viewCount);
-		render();
-	}).catch(error => console.error(error));
+		render(key, ['youTubeSubscribers', 'youTubeViews']);
+	}).catch(error => console.error('YouTube error:', error));
 };
 
-const parseInst = (resource, data) => {
+const parseInst = (resource, data, key) => {
 	inst.getFollowers({
 			userId: resource.inst
 		})
 		.then(response => {
 			data.inst = response.count;
-			render();
+			render(key, ['inst']);
 		})
-		.catch(error => console.error(error));
+		.catch(error => console.error('Instagram error:', error));
 };
 
-let out = document.querySelector('#out');
 
-function render() {
-	console.table(data);
-	out.innerHTML = data;
-}
+
 
 function startParsing() {
 	for (let key in resources) {
-		if (resources[key].metricUrl) parse(`${settings.metric}${resources[key].metricUrl}`, parseMetric, data[key]);
-		if (resources[key].vk) parseVK(resources[key], data[key]);
-		if (resources[key].tg) parseTG(resources[key], data[key]);
-		if (resources[key].youTube) parseYouTube(resources[key], data[key]);
-		if (resources[key].ok) parse(`${settings.ok.before}${resources.dnrsovet.ok}${settings.ok.after}`, parseOk, data[key]);
-		if (resources[key].inst) parseInst(resources[key], data[key]);
-		if (resources[key].tw) parse(`${settings.tw}${resources[key].tw}`, parseTw, data[key]);
+		if (resources[key].metricUrl) parse(`${settings.metric}${resources[key].metricUrl}`, parseMetric, data[key], key);
+		if (resources[key].vk) parseVK(resources[key], data[key], key);
+		if (resources[key].tg) parseTG(resources[key], data[key], key);
+		if (resources[key].youTube) parseYouTube(resources[key], data[key], key);
+		if (resources[key].ok) parse(`${settings.ok.before}${resources.dnrsovet.ok}${settings.ok.after}`, parseOk, data[key], key);
+		if (resources[key].inst) parseInst(resources[key], data[key], key);
+		if (resources[key].tw) parse(`${settings.tw}${resources[key].tw}`, parseTw, data[key], key);
 	}
 }
 
 /* web-muzzle */
+const start = document.querySelector('#start');
+const table = document.querySelector('#main').querySelector('tbody');
+
+window.addEventListener('DOMContentLoaded', () => {
+	const generateTable = () => {
+		for (let resourceKey in data) {
+			let resource = document.createElement('tr');
+			resource.id = resourceKey;
+			for (let attributeKey in data[resourceKey]) {
+				let cell = document.createElement('td');
+				// console.log(resourceKey, attributeKey);
+				cell.classList.add(attributeKey, 'hide');
+				cell.innerHTML = attributeKey === 'name' ? data[resourceKey][attributeKey] : '-';
+				setTimeout(() => cell.classList.remove('hide'), 200);
+				resource.append(cell);
+			}
+			table.append(resource);
+		}
+	};
+	generateTable();
+});

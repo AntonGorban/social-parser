@@ -18,7 +18,7 @@ $maxWidth: 1280;
 	bottom: 0;
 	background: $black;
 	z-index: 999999;
-	transition: opacity .5s ease;
+	transition: opacity .3s ease;
 
 	&.loaded_hiding {
 		opacity: 0;
@@ -219,6 +219,7 @@ a {
 		border-spacing: 0;
 		border-collapse: collapse;
 		overflow: hidden;
+		min-width: 100%;
 
 		td {
 			text-align: center;
@@ -238,7 +239,14 @@ a {
 			td {
 				font-size: 14px;
 				font-weight: 400;
+				transition: opacity .2s ease;
+				opacity: 1;
+
+				&.hide {
+					opacity: 0;
+				}
 			}
+
 		}
 
 	}
