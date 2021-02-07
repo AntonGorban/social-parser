@@ -1,7 +1,7 @@
 /* jshint esversion: 9 */
 const axios = require('axios');
 const path = require('path');
-const jsdom = require("jsdom");
+const jsdom = require('jsdom');
 const {
 	JSDOM
 } = jsdom;
@@ -9,7 +9,7 @@ const easyvk = require('easyvk');
 const fs = require('fs-extra');
 const tgBot = require('node-telegram-bot-api');
 const {
-	google
+	google,
 } = require('googleapis');
 
 const resources = require(`${__dirname}/json/resources.json`);
@@ -17,28 +17,29 @@ const settings = require(`${__dirname}/json/settings.json`);
 const api = require(`${__dirname}/json/api.json`);
 
 const tg = new tgBot(api.tg, {
-	polling: true
+	polling: true,
 });
 const youTube = google.youtube({
 	version: 'v3',
-	auth: api.youTube
+	auth: api.youTube,
 });
 const Instagram = require('instagram-web-api');
+
 const inst = new Instagram({
 	username: api.inst.login,
-	password: api.inst.password
+	password: api.inst.password,
 });
 
 inst.login({
 		username: api.inst.login,
-		password: api.inst.password
+		password: api.inst.password,
 	})
 	.then(log => console.log(`Instagram authenticated: ${log.authenticated}`))
 	.catch(error => console.error('Instagram login error:', error));
 
 const data = {};
 
-for (let key in resources) {
+for (const key in resources) {
 	data[key] = {
 		name: resources[key].name,
 		dayViews: null,
@@ -53,7 +54,7 @@ for (let key in resources) {
 		youTubeViews: null,
 		ok: null,
 		inst: null,
-		tw: null
+		tw: null,
 	};
 }
 const strToInt = str => Number(`${str}`.replace(/\D/g, ''));
@@ -72,7 +73,7 @@ async function parse(url, parseFunc, data, key) {
 }
 
 const parseMetric = (html, data, key) => {
-	let table = html.querySelector('div#trafik').querySelector('.analysis-test__content').querySelector('tbody').children;
+	const table = html.querySelector('div#trafik').querySelector('.analysis-test__content').querySelector('tbody').children;
 	data.dayViews = strToInt(table[0].children[1].innerHTML);
 	data.dayVisitors = strToInt(table[1].children[1].innerHTML);
 	data.weekViews = strToInt(table[0].children[2].innerHTML);
@@ -86,19 +87,19 @@ const parseMetric = (html, data, key) => {
 		'weekViews',
 		'weekVisitors',
 		'monthViews',
-		'monthVisitors'
+		'monthVisitors',
 	]);
 };
 
 const parseTw = (html, data, key) => {
-	let members = html.querySelector('.table.table-bordered.table-condensed.dashed .col-xs-2');
+	const members = html.querySelector('.table.table-bordered.table-condensed.dashed .col-xs-2');
 	data.tw = strToInt(members.innerHTML);
 	if (settings.snapshots) fs.writeFile(`./snapshots/${data.date} tw - ${data.name}.html`, html.innerHTML);
 	render(key, ['tw']);
 };
 
 const parseOk = (html, data, key) => {
-	let members = html.querySelector('#groupMembersCntEl');
+	const members = html.querySelector('#groupMembersCntEl');
 	data.ok = strToInt(members.innerHTML);
 	if (settings.snapshots) fs.writeFile(`./snapshots/${data.date} ok - ${data.name}.html`, html.innerHTML);
 	render(key, ['ok']);
@@ -107,11 +108,11 @@ const parseOk = (html, data, key) => {
 const parseVK = (resource, data, key) => {
 	easyvk({
 		// https://vkhost.github.io/
-		token: api.vk
-	}).then(async vk => {
-		let response = await vk.call('groups.getById', {
+		token: api.vk,
+	}).then(async (vk) => {
+		const response = await vk.call('groups.getById', {
 			group_id: resource.vk,
-			fields: 'members_count'
+			fields: 'members_count',
 		});
 		data.vk = response[0].members_count;
 		render(key, ['vk']);
@@ -120,7 +121,7 @@ const parseVK = (resource, data, key) => {
 
 const parseTG = (resource, data, key) => {
 	tg.getChatMembersCount(resource.tg)
-		.then(response => {
+		.then((response) => {
 			data.tg = response;
 			render(key, ['tg']);
 		})
@@ -130,8 +131,8 @@ const parseTG = (resource, data, key) => {
 const parseYouTube = (resource, data, key) => {
 	youTube.channels.list({
 		part: 'statistics',
-		id: resource.youTube
-	}).then(response => {
+		id: resource.youTube,
+	}).then((response) => {
 		data.youTubeSubscribers = strToInt(response.data.items[0].statistics.subscriberCount);
 		data.youTubeViews = strToInt(response.data.items[0].statistics.viewCount);
 		render(key, ['youTubeSubscribers', 'youTubeViews']);
@@ -140,9 +141,9 @@ const parseYouTube = (resource, data, key) => {
 
 const parseInst = (resource, data, key) => {
 	inst.getFollowers({
-			userId: resource.inst
+			userId: resource.inst,
 		})
-		.then(response => {
+		.then((response) => {
 			data.inst = response.count;
 			render(key, ['inst']);
 		})
@@ -150,10 +151,8 @@ const parseInst = (resource, data, key) => {
 };
 
 
-
-
 function startParsing() {
-	for (let key in resources) {
+	for (const key in resources) {
 		if (resources[key].metricUrl) parse(`${settings.metric}${resources[key].metricUrl}`, parseMetric, data[key], key);
 		if (resources[key].vk) parseVK(resources[key], data[key], key);
 		if (resources[key].tg) parseTG(resources[key], data[key], key);
@@ -169,9 +168,9 @@ const start = document.querySelector('#start');
 const table = document.querySelector('#main').querySelector('tbody');
 
 function render(resourceKey, dataKeys = []) {
-	dataKeys.forEach(key => {
+	dataKeys.forEach((key) => {
 		// console.log(resourceKey, key, data[resourceKey][key]);
-		let cell = table.querySelector(`#${resourceKey}`).querySelector(`.${key}`);
+		const cell = table.querySelector(`#${resourceKey}`).querySelector(`.${key}`);
 		cell.classList.add('hide');
 		setTimeout(() => {
 			cell.innerHTML = typeof (data[resourceKey][key]) === 'number' ? prettyNumber(data[resourceKey][key]) : data[resourceKey][key];
@@ -182,14 +181,16 @@ function render(resourceKey, dataKeys = []) {
 
 window.addEventListener('DOMContentLoaded', () => {
 	const generateTable = () => {
-		for (let resourceKey in data) {
-			let resource = document.createElement('tr');
+		for (const resourceKey in data) {
+			const resource = document.createElement('tr');
 			resource.id = resourceKey;
-			for (let attributeKey in data[resourceKey]) {
-				let cell = document.createElement('td');
+			for (const attributeKey in data[resourceKey]) {
+				const cell = document.createElement('td');
 				// console.log(resourceKey, attributeKey);
 				cell.classList.add(attributeKey, 'hide');
-				cell.innerHTML = attributeKey === 'name' ? data[resourceKey][attributeKey] : '-';
+				cell.innerHTML = attributeKey === 'name' ?
+					data[resourceKey][attributeKey] :
+					resources[resourceKey][attributeKey] !== null ? 'no data' : '-';
 				setTimeout(() => cell.classList.remove('hide'), 200);
 				resource.append(cell);
 			}
