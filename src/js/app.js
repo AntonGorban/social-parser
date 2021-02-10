@@ -151,15 +151,31 @@ const parseInst = (resource, data, key) => {
 };
 
 
-function startParsing() {
+async function startParsing() {
 	for (const key in resources) {
-		if (resources[key].metricUrl) parse(`${settings.metric}${resources[key].metricUrl}`, parseMetric, data[key], key);
-		if (resources[key].vk) parseVK(resources[key], data[key], key);
-		if (resources[key].tg) parseTG(resources[key], data[key], key);
-		if (resources[key].youTube) parseYouTube(resources[key], data[key], key);
-		if (resources[key].ok) parse(`${settings.ok.before}${resources.dnrsovet.ok}${settings.ok.after}`, parseOk, data[key], key);
-		if (resources[key].inst) parseInst(resources[key], data[key], key);
-		if (resources[key].tw) parse(`${settings.tw}${resources[key].tw}`, parseTw, data[key], key);
+		if (resources[key].metricUrl !== null && (
+				data[key].dayViews === null ||
+				data[key].dayVisitors === null ||
+				data[key].weekViews === null ||
+				data[key].weekVisitors === null ||
+				data[key].monthViews === null ||
+				data[key].monthVisitors === null
+			)) await parse(`${settings.metric}${resources[key].metricUrl}`, parseMetric, data[key], key);
+
+		if (resources[key].vk !== null && data[key].vk === null) parseVK(resources[key], data[key], key);
+
+		if (resources[key].tg !== null && data[key].tg === null) parseTG(resources[key], data[key], key);
+
+		if (resources[key].youTube !== null && (
+				data[key].youTubeSubscribers === null ||
+				data[key].youTubeViews === null
+			)) parseYouTube(resources[key], data[key], key);
+
+		if (resources[key].ok !== null && data[key].ok === null) parse(`${settings.ok.before}${resources[key].ok}${settings.ok.after}`, parseOk, data[key], key);
+
+		if (resources[key].inst !== null && data[key].inst === null) parseInst(resources[key], data[key], key);
+
+		if (resources[key].tw !== null && data[key].tw === null) parse(`${settings.tw}${resources[key].tw}`, parseTw, data[key], key);
 	}
 }
 
