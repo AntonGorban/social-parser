@@ -173,6 +173,7 @@ function render(resourceKey, dataKeys = []) {
 		const cell = table.querySelector(`#${resourceKey}`).querySelector(`.${key}`);
 		cell.classList.add('hide');
 		setTimeout(() => {
+			cell.style.color = null;
 			cell.innerHTML = typeof (data[resourceKey][key]) === 'number' ? prettyNumber(data[resourceKey][key]) : data[resourceKey][key];
 			cell.classList.remove('hide');
 		}, 200);
@@ -189,8 +190,10 @@ window.addEventListener('DOMContentLoaded', () => {
 				// console.log(resourceKey, attributeKey);
 				cell.classList.add(attributeKey, 'hide');
 				cell.innerHTML = attributeKey === 'name' ?
-					data[resourceKey][attributeKey] :
+					`<a href="${resources[resourceKey].url}" target="_blank">${data[resourceKey][attributeKey]}</a>` :
 					resources[resourceKey][attributeKey] !== null ? 'no data' : '-';
+				if (attributeKey.includes('youTube') && resources[resourceKey].youTube === null) cell.innerHTML = '-';
+				if (!cell.classList.contains('name')) cell.style.color = '#9d9d9d';
 				setTimeout(() => cell.classList.remove('hide'), 200);
 				resource.append(cell);
 			}
