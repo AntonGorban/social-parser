@@ -89,7 +89,8 @@ body {
   background: #1d1d1d;
   color: #f4f4f4;
   width: 100%;
-  min-height: 100vh;
+  height: 100vh;
+  overflow-y: hidden;
 }
 
 a {
@@ -162,6 +163,7 @@ a {
 }
 
 #main {
+  height: calc(100% - 125px);
   overflow-x: scroll;
 }
 #main table {
@@ -209,4 +211,5 @@ a {
 ::-webkit-scrollbar-button:vertical:start:decrement, ::-webkit-scrollbar-button:vertical:end:increment, ::-webkit-scrollbar-button:horizontal:start:decrement, ::-webkit-scrollbar-button:horizontal:end:increment {
   height: 0;
   width: 0;
+  background-color: #1d1d1d;
 }
