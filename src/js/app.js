@@ -174,7 +174,8 @@ async function startParsing() {
 
 		if (resources[key].inst !== null && data[key].inst === null) parseInst(resources[key], data[key], key);
 
-		if (resources[key].tw !== null && data[key].tw === null) parse(`${settings.tw}${resources[key].tw}`, parseTw, data[key], key);
+		if (resources[key].tw !== null && data[key].tw === null) await parse(`${settings.tw}${resources[key].tw}`, parseTw, data[key], key);
+		console.log(`${resources[key].name} : parsing done`);
 	}
 }
 
