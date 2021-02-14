@@ -11,10 +11,9 @@ const tgBot = require('node-telegram-bot-api');
 const {
 	google,
 } = require('googleapis');
-
-const resources = require(`${__dirname}/json/resources.json`);
-const settings = require(`${__dirname}/json/settings.json`);
-const api = require(`${__dirname}/json/api.json`);
+const resources = require(`${__dirname}/../resources.json`);
+const settings = require(`${__dirname}/../settings.json`);
+const api = require(`${__dirname}/../api.json`);
 
 const tg = new tgBot(api.tg, {
 	polling: true,
