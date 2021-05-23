@@ -22,7 +22,7 @@ Languages: [EN](https://github.com/AntonGorban/social-parser/blob/main/README.md
 
 ### Installing
 
-First you need to download the [release v2.1.0](https://github.com/AntonGorban/social-parser/releases/tag/v2.1.0) of the project from `github` or use the command
+First you need to download the [release v2.1.0](https://github.com/AntonGorban/social-parser/releases/tag/2.1.0) of the project from `github` or use the command
 
 ```Shell
 git clone https://github.com/AntonGorban/social-parser.git
