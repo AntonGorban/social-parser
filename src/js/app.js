@@ -11,9 +11,9 @@ const tgBot = require('node-telegram-bot-api');
 const {
 	google,
 } = require('googleapis');
-const resources = require(`${__dirname}/../resources.json`);
-const settings = require(`${__dirname}/../settings.json`);
-const api = require(`${__dirname}/../api.json`);
+const resources = require(`${__dirname}\\..\\..\\..\\..\\resources.json`);
+const settings = require(`${__dirname}\\..\\..\\..\\..\\settings.json`);
+const api = require(`${__dirname}\\..\\..\\..\\..\\api.json`);
 
 const tg = new tgBot(api.tg, {
 	polling: true,
@@ -28,7 +28,8 @@ const inst = new Instagram({
 	username: api.inst.login,
 	password: api.inst.password,
 });
-
+const excel = require('exceljs');
+const Workbook = new excel.Workbook();
 inst.login({
 		username: api.inst.login,
 		password: api.inst.password,
@@ -58,13 +59,11 @@ for (const key in resources) {
 }
 const strToInt = str => Number(`${str}`.replace(/\D/g, ''));
 const prettyNumber = str => `${str}`.split('').reverse().join('').replace(/(\d{3})/g, '$1 ').split('').reverse().join('').trim();
+const prettyDate = date => `${new Date(date).getDate()}_${new Date(date).getMonth() + 1}_${new Date(date).getFullYear()}~${new Date(date).getHours()}-${new Date(date).getMinutes()}-${new Date(date).getSeconds()}-${new Date(date).getMilliseconds()}`;
 
 async function parse(url, parseFunc, data, key) {
 	try {
-		let date = Date.now();
 		const response = await axios.get(url);
-		date = new Date((date + Date.now()) / 2);
-		data.date = `${date.getDate()}_${date.getMonth() + 1}_${date.getFullYear()} ${date.getHours()}-${date.getMinutes()}-${date.getSeconds()}-${date.getMilliseconds()}`;
 		await parseFunc(new JSDOM(response.data).window.document.body, data, key);
 	} catch (error) {
 		console.error('parse error:', error);
@@ -79,7 +78,7 @@ const parseMetric = (html, data, key) => {
 	data.weekVisitors = strToInt(table[1].children[2].innerHTML);
 	data.monthViews = strToInt(table[0].children[3].innerHTML);
 	data.monthVisitors = strToInt(table[1].children[3].innerHTML);
-	if (settings.snapshots) fs.writeFile(`./snapshots/${data.date} metric - ${data.name}.html`, html.innerHTML);
+	if (settings.snapshots) fs.writeFile(`./snapshots/metric-${prettyDate(Date.now())}-${data.name}.html`, html.innerHTML);
 	render(key, [
 		'dayViews',
 		'dayVisitors',
@@ -93,14 +92,14 @@ const parseMetric = (html, data, key) => {
 const parseTw = (html, data, key) => {
 	const members = html.querySelector('.table.table-bordered.table-condensed.dashed .col-xs-2');
 	data.tw = strToInt(members.innerHTML);
-	if (settings.snapshots) fs.writeFile(`./snapshots/${data.date} tw - ${data.name}.html`, html.innerHTML);
+	if (settings.snapshots) fs.writeFile(`./snapshots/${prettyDate(Date.now())} tw - ${data.name}.html`, html.innerHTML);
 	render(key, ['tw']);
 };
 
 const parseOk = (html, data, key) => {
 	const members = html.querySelector('#groupMembersCntEl');
 	data.ok = strToInt(members.innerHTML);
-	if (settings.snapshots) fs.writeFile(`./snapshots/${data.date} ok - ${data.name}.html`, html.innerHTML);
+	if (settings.snapshots) fs.writeFile(`./snapshots/${prettyDate(Date.now())} ok - ${data.name}.html`, html.innerHTML);
 	render(key, ['ok']);
 };
 
@@ -175,12 +174,14 @@ async function startParsing() {
 		if (resources[key].inst !== null && data[key].inst === null) parseInst(resources[key], data[key], key);
 
 		if (resources[key].tw !== null && data[key].tw === null) await parse(`${settings.tw}${resources[key].tw}`, parseTw, data[key], key);
+		data[key].date = Date.now();
 		console.log(`${resources[key].name} : parsing done`);
 	}
 }
 
 /* web-muzzle */
 const start = document.querySelector('#start');
+const excelBtn = document.querySelector('#excel');
 const table = document.querySelector('#main').querySelector('tbody');
 
 function render(resourceKey, dataKeys = []) {
@@ -195,6 +196,53 @@ function render(resourceKey, dataKeys = []) {
 		}, 200);
 	});
 }
+
+
+
+async function dataToExcel() {
+	fs.copy(`${settings.xlsx.path}\\${settings.xlsx.name}`, `${settings.xlsx.path}\\clone-${prettyDate(Date.now())}-${settings.xlsx.name}`);
+	let wb = await Workbook.xlsx.readFile(`${settings.xlsx.path}\\${settings.xlsx.name}`);
+	for (let key in resources) {
+		try {
+			let ws = wb.getWorksheet(resources[key].name);
+			const table = ws.getTable(key);
+			const tableRef = {
+				start: {
+					row: Number(table.table.tableRef.split(':')[0].replace(/\D/g, '')),
+					col: table.table.tableRef.split(':')[0].replace(/\d/g, '')
+				},
+				end: {
+					row: Number(table.table.tableRef.split(':')[1].replace(/\D/g, '')),
+					col: table.table.tableRef.split(':')[1].replace(/\d/g, '')
+				}
+			};
+			const lastRow = ws.getRow(tableRef.end.row + 1);
+			table.table.tableRef = `${tableRef.start.col}${tableRef.start.row}:${tableRef.end.col}${++tableRef.end.row}`;
+			lastRow.values = [
+				data[key].date !== null ? new Date(data[key].date) : '-',
+				data[key].dayViews !== null ? data[key].dayViews : '-',
+				data[key].dayVisitors !== null ? data[key].dayVisitors : '-',
+				data[key].weekViews !== null ? data[key].weekViews : '-',
+				data[key].weekVisitors !== null ? data[key].weekVisitors : '-',
+				data[key].monthViews !== null ? data[key].monthViews : '-',
+				data[key].monthVisitors !== null ? data[key].monthVisitors : '-',
+				data[key].vk !== null ? data[key].vk : '-',
+				data[key].tg !== null ? data[key].tg : '-',
+				data[key].youTubeSubscribers !== null ? data[key].youTubeSubscribers : '-',
+				data[key].youTubeViews !== null ? data[key].youTubeViews : '-',
+				data[key].ok !== null ? data[key].ok : '-',
+				data[key].inst !== null ? data[key].inst : '-',
+				data[key].tw !== null ? data[key].tw : '-'
+			];
+			lastRow.numFmt = '#,##0';
+			lastRow.getCell('A').numFmt = 'mm-dd-yy';
+		} catch (error) {
+			console.error('dataToExcel error:', error);
+		}
+	}
+	await wb.xlsx.writeFile(`${settings.xlsx.path}\\${settings.xlsx.name}`);
+}
+
 
 window.addEventListener('DOMContentLoaded', () => {
 	const generateTable = () => {
@@ -220,5 +268,9 @@ window.addEventListener('DOMContentLoaded', () => {
 
 	start.addEventListener('click', () => {
 		startParsing();
+	});
+
+	excelBtn.addEventListener('click', () => {
+		dataToExcel();
 	});
 });

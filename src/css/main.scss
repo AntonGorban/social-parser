@@ -1,7 +1,7 @@
 $black: #1d1d1d;
 $light_black: #4d4d4d;
 $white: #f4f4f4;
-$dark_white: #f4f4f4;
+$dark_white: #9d9d9d;
 $maxWidth: 1280;
 
 #preloader {
@@ -51,7 +51,7 @@ $maxWidth: 1280;
 			display: block;
 			height: 0;
 			width: 0;
-			background: $dark_white;
+			background: $white;
 			animation: preloader__item 2s infinite linear;
 			border-radius: 50%;
 			position: absolute;
@@ -123,6 +123,15 @@ body {
 	height: 100vh;
 	overflow-y: hidden;
 
+	&:after {
+		content: 'v2.1.0';
+		position: fixed;
+		font-size: 9px;
+		bottom: 1px;
+		right: 10px;
+		text-align: right;
+		color: $light_black
+	}
 }
 
 a {
@@ -265,17 +274,10 @@ a {
 		}
 	}
 
-	&-button {
-
-		&:vertical,
-		&:horizontal {
-
-			&:start:decrement,
-			&:end:increment {
-				height: 0;
-				width: 0;
-				background-color: $black;
-			}
-		}
+	&-button,
+	&-corner {
+		height: 0;
+		width: 0;
+		display: none;
 	}
 }

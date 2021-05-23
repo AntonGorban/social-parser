@@ -10,6 +10,11 @@
 
 	"snapshots": false,
 
+	"xlsx": {
+		"path": "C:\\Projects\\social-parser-data",
+		"name": "metric.xlsx"
+	},
+
 	"nullMetric": {
 		"dayViews": null,
 		"dayVisitors": null,
