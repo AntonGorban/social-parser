@@ -1,28 +1,89 @@
 {
   "name": "social-parser",
-  "version": "1.0.0",
+  "productName": "socialParser",
+  "version": "2.1.0",
   "description": "Shows the metric of site visits and metrics from VK, Telegram, YouTube, Ok, Instagram and Twitter",
-  "main": "app.js",
+  "main": "src/index.js",
   "scripts": {
-    "start": "node app.js"
+    "console": "node app.js",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish": "electron-forge publish",
+    "lint": "eslint src --color"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AntonGorban/social-parser.git"
   },
-  "author": "Anton Gorban",
+  "keywords": [],
+  "author": "Anton Gorban <antogor.work@gmail.com>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/AntonGorban/ministry-information-parser/issues"
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "./src/icons/win/icon.ico"
+      },
+      "make_targets": {
+        "win32": [
+          "squirrel"
+        ],
+        "darwin": [
+          "zip"
+        ],
+        "linux": [
+          "deb",
+          "rpm"
+        ]
+      },
+      "electronPackagerConfig": {
+        "packageManager": "npm",
+        "icon": "./src/icons/win/icon.ico"
+      },
+      "electronWinstallerConfig": {
+        "name": "social_parser",
+        "icon": "./src/icons/win/icon.ico"
+      },
+      "electronInstallerDebian": {},
+      "electronInstallerRedhat": {},
+      "github_repository": {
+        "owner": "AntonGorban",
+        "name": "social-parser"
+      },
+      "windowsStoreConfig": {
+        "packageName": "",
+        "name": "socialParser"
+      }
+    }
   },
-  "homepage": "https://github.com/AntonGorban/ministry-information-parser#readme",
+  "bugs": {
+    "url": "https://github.com/AntonGorban/social-parser/issues"
+  },
+  "homepage": "https://github.com/AntonGorban/social-parser#readme",
   "dependencies": {
     "axios": "^0.21.1",
     "easyvk": "^2.8.2",
+    "electron-compile": "^6.4.4",
+    "electron-log": "^4.3.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "exceljs": "^4.2.0",
     "fs-extra": "^9.1.0",
     "googleapis": "^67.0.0",
     "instagram-web-api": "^2.2.2",
     "jsdom": "^16.4.0",
-    "node-telegram-bot-api": "^0.51.0"
+    "node-telegram-bot-api": "^0.51.0",
+    "update-electron-app": "^2.0.1"
+  },
+  "devDependencies": {
+    "eslint-plugin-import": "^2.22.1",
+    "babel-plugin-transform-async-to-generator": "^6.24.1",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "electron-forge": "^5.2.4",
+    "electron-prebuilt-compile": "8.2.0",
+    "eslint": "^3.19.0",
+    "eslint-config-airbnb": "^15.1.0",
+    "eslint-plugin-jsx-a11y": "^5.1.1",
+    "eslint-plugin-react": "^7.22.0"
   }
 }

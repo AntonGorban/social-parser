@@ -22,7 +22,7 @@ Languages: [EN](https://github.com/AntonGorban/social-parser/blob/main/README.md
 
 ### Installing
 
-First you need to download the release of the project from `github` or use the command
+First you need to download the [release v2.1.0](https://github.com/AntonGorban/social-parser/releases/tag/v2.1.0) of the project from `github` or use the command
 
 ```Shell
 git clone https://github.com/AntonGorban/social-parser.git
@@ -30,17 +30,7 @@ git clone https://github.com/AntonGorban/social-parser.git
 
 Also you need to install [Node.js](https://nodejs.org) ( latest or LTS version ).
 
-After these steps, start the console in the project directory and run
-
-```Shell
-npm i
-```
-
-Then you need to fill in the files `api.json` and `resources.json`.After filling, you can run the program by executing
-
-```Shell
-npm run start
-```
+After that, you need to install the application, fill out the files `api.json` and `resources.json` And put them along the way `C:\Users\your_user\AppData\Local\social_parser` and also move the file `settings.json`.
 
 ### APIs
 
