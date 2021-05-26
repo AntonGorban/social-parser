@@ -1,11 +1,11 @@
 class UserController {
-  async registration(req, res) {}
+  async login(req, res, next) {}
 
-  async login(req, res) {}
-
-  async auth(req, res) {
+  async auth(req, res, next) {
     res.status(200).json({ m: "Hello controller" });
   }
+
+  async registration(req, res, next) {}
 }
 
 module.exports = new UserController();
