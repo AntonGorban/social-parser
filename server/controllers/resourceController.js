@@ -3,7 +3,7 @@ class ResourceController {
 
   async getOneById(req, res, next) {}
 
-  async add(req, res, next) {}
+  async create(req, res, next) {}
 
   async update(req, res, next) {}
 }
