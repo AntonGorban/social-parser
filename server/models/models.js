@@ -14,11 +14,11 @@ const Users = sequelize.define("users", {
 });
 
 const Tokens = sequelize.define("tokens", {
-  vk: { type: DataTypes.STRING },
-  tg: { type: DataTypes.STRING },
-  youtube: { type: DataTypes.STRING },
-  instLogin: { type: DataTypes.STRING },
-  instPassword: { type: DataTypes.STRING },
+  vk: { type: DataTypes.STRING, defaultValue: null },
+  tg: { type: DataTypes.STRING, defaultValue: null },
+  youtube: { type: DataTypes.STRING, defaultValue: null },
+  instLogin: { type: DataTypes.STRING, defaultValue: null },
+  instPassword: { type: DataTypes.STRING, defaultValue: null },
 });
 
 const Parse = sequelize.define("parse", {
