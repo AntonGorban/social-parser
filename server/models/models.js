@@ -89,7 +89,7 @@ Parse.belongsTo(Users);
 Resources.hasMany(ParseInfo);
 ParseInfo.belongsTo(Resources);
 
-Parse.hasMany(ParseInfo);
+Parse.hasMany(ParseInfo, { as: "data" });
 ParseInfo.belongsTo(Parse);
 
 Users.hasOne(Tokens);
