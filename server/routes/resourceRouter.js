@@ -1,13 +1,14 @@
 const Router = require("express");
 const router = new Router();
 
-const resourceController = require("../controllers/resourceController");
+const ResourceController = require("../controllers/ResourceController");
+const authMiddleware = require("../middleware/authMiddleware");
 
-router.get("/", resourceController.getAllByUserId);
-router.get("/:id", resourceController.getOneById);
+router.get("/", authMiddleware, ResourceController.getAllByUserId);
+router.get("/:id", authMiddleware, ResourceController.getOneById);
 
-router.post("/", resourceController.create);
+router.post("/", authMiddleware, ResourceController.create);
 
-router.patch("/", resourceController.update);
+router.patch("/:id", authMiddleware, ResourceController.update);
 
 module.exports = router;
