@@ -17,11 +17,19 @@ if (require("electron-squirrel-startup")) {
   app.quit();
 }
 
+// require("update-electron-app")({
+// logger: require("electron-log"),
+// });
+
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    width: 800,
+    minWidth: 800,
+    minHeight: 400,
+    width: 1024,
     height: 600,
+    backgroundColor: "#1d1d1d",
+    autoHideMenuBar: true,
     webPreferences: {
       nodeIntegration: true,
     },
