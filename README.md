@@ -16,7 +16,7 @@ Languages: [EN](https://github.com/AntonGorban/social-parser/blob/main/README.md
         - [Text instruction](#text-instruction-1)
         - [Images instruction](#images-instruction-1)
       - [Instagram](#instagram)
-    - [Resourses](#resourses)
+    - [resources](#resources)
 
 ## Getting started
 
@@ -123,7 +123,7 @@ Also, the parser needs to log in with the Instagram account.To do this, add `Ins
 }
 ```
 
-### Resourses
+### resources
 
 All the resources you need for parsing need to be written to the `resources.json` file, an example of this file is `resources-example.json`, just enter the data into it and remove the `-example` from the name.
 

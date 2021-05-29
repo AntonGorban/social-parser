@@ -16,7 +16,7 @@ Languages: [EN](https://github.com/AntonGorban/social-parser/blob/main/README.md
         - [Text instruction](#text-instruction-1)
         - [Images instruction](#images-instruction-1)
       - [Instagram](#instagram)
-    - [Resourses](#resourses)
+    - [resources](#resources)
 
 ## Getting started
 
@@ -123,7 +123,7 @@ git clone https://github.com/AntonGorban/social-parser.git
 }
 ```
 
-### Resourses
+### resources
 
 Все нужные вам для парсинга ресурсы нужно записать в файл `resources.json`, пример данного файла `resources-example.json`, просто впишите в него данные и уберите `-example` из названия.
 
