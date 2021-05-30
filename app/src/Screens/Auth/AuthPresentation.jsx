@@ -12,6 +12,8 @@ export const AuthPresentation = ({
   onUpdatePassword,
   setIsLoginTrue,
   setIsLoginFalse,
+  registration,
+  login,
 }) => {
   let history = useHistory();
   // if (user.auth) history.push("/home");
@@ -21,16 +23,18 @@ export const AuthPresentation = ({
       <Input value={user.email} placeholder="Email" onChange={onUpdateEmail} />
       <Input
         value={user.password}
-        placeholder="Пароль"
+        placeholder="Password"
         onChange={onUpdatePassword}
+        type="password"
       />
       <Button
         text={user.isLogin ? "Войти" : "Зарегистрироваться"}
         icon={user.isLogin ? "fas fa-sign-in-alt" : "fas fa-user-plus"}
+        onClick={user.isLogin ? login : registration}
       />
       {user.isLogin ? (
         <p className={classes.change}>
-          У вас нет аккауна?{" "}
+          У вас нет аккаунта?{" "}
           <span className={classes.link} onClick={setIsLoginFalse}>
             Зарегистрируйтесь
           </span>

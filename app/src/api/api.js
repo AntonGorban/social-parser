@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl = "http://localhost:7000/";
+const apiUrl = "http://localhost:7000/api/";
 
 const get = async (url = "") => {
   let response = null;
@@ -62,3 +62,4 @@ const api = {
 };
 
 export default api;
+global.api = api;

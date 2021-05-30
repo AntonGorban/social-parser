@@ -36,4 +36,5 @@
 .link {
 	color: var(--blue);
 	font-weight: 600;
+	cursor: pointer;
 }

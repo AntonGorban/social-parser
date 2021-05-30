@@ -1,5 +1,3 @@
-import api from "../api/api";
-
 const UPDATE_EMAIL = "UPDATE_EMAIL";
 const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 const UPDATE_ERROR = "UPDATE_ERROR";
