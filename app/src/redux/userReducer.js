@@ -2,12 +2,16 @@ import api from "../api/api";
 
 const UPDATE_EMAIL = "UPDATE_EMAIL";
 const UPDATE_PASSWORD = "UPDATE_PASSWORD";
+const UPDATE_ERROR = "UPDATE_ERROR";
 const SET_AUTH = "SET-AUTH";
+const SET_IS_LOGIN = "SET-IS-LOGIN";
 
 const initialState = {
   email: "",
   password: "",
   auth: false,
+  error: "",
+  isLogin: true,
 };
 
 const userReducer = (prevState = initialState, action) => {
@@ -25,9 +29,19 @@ const userReducer = (prevState = initialState, action) => {
       state.password = password;
       return state;
 
+    case UPDATE_ERROR:
+      let error = action.error;
+      state.error = error;
+      return state;
+
     case SET_AUTH:
       let auth = action.auth;
       state.auth = auth;
+      return state;
+
+    case SET_IS_LOGIN:
+      let isLogin = action.isLogin;
+      state.isLogin = isLogin;
       return state;
 
     default:
@@ -42,4 +56,9 @@ export const updatePasswordAC = (password = "") => ({
   type: UPDATE_PASSWORD,
   password,
 });
+export const updateErrorAC = (error = "") => ({ type: UPDATE_ERROR, error });
 export const setAuthAC = (auth = false) => ({ type: SET_AUTH, auth });
+export const setIsLoginAC = (isLogin = true) => ({
+  type: SET_IS_LOGIN,
+  isLogin,
+});

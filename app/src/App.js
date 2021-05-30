@@ -8,7 +8,6 @@ function App({ isAuth }) {
   return (
     <div>
       {isAuth ? <Nav /> : ""}
-      {isAuth ? "true" : "false"}
       <Switch>
         <Route exact path="/home" component={Home} />
         <Route exact path="/auth" component={AuthContainer} />

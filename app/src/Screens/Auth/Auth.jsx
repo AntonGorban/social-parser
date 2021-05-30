@@ -2,22 +2,17 @@ import React from "react";
 import api from "../../api/api";
 import { AuthPresentation } from "./AuthPresentation";
 
+// let history = useHistory();
 export class Auth extends React.Component {
-  onUpdateEmail = (email) => {
-    this.props.updateEmail(email);
-  };
+  onUpdateEmail = (event) => this.props.updateEmail(event.target.value);
 
-  onUpdatePassword = (password) => {
-    this.props.updatePassword(password);
-  };
+  onUpdatePassword = (event) => this.props.updatePassword(event.target.value);
 
-  setAuthTrue = () => {
-    this.props.setAuth(true);
-  };
+  _updateError = (event) => this.props.updateError(event.target.value);
 
-  setAuthFalse = () => {
-    this.props.setAuth(false);
-  };
+  setIsLoginTrue = () => this.props.setIsLogin(true);
+
+  setIsLoginFalse = () => this.props.setIsLogin(false);
 
   render() {
     return (
@@ -25,8 +20,8 @@ export class Auth extends React.Component {
         user={this.props.user}
         onUpdateEmail={this.onUpdateEmail}
         onUpdatePassword={this.onUpdatePassword}
-        setAuthTrue={this.setAuthTrue}
-        setAuthFalse={this.setAuthFalse}
+        setIsLoginTrue={this.setIsLoginTrue}
+        setIsLoginFalse={this.setIsLoginFalse}
       />
     );
   }
