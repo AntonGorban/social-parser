@@ -10,7 +10,7 @@
 	padding: 5px;
 	color: var(--dark);
 	font-weight: 400;
-	font-size: 18px;
+	font-size: 16px;
 	border-radius: 10px;
 	border: 2px solid var(--blue);
 	outline: none;
@@ -28,7 +28,7 @@
 	left: 0;
 	z-index: 2;
 	color: var(--light-black);
-	transform: translate(10px, -190%);
+	transform: translate(10px, -180%);
 	color: var(--blue);
 	font-size: 16px;
 	font-weight: 600;
@@ -40,5 +40,5 @@
 }
 
 .input:focus+.placeholder {
-	transform: translate(10px, -190%);
+	transform: translate(10px, -180%);
 }

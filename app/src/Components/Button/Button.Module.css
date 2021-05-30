@@ -4,22 +4,22 @@
 	background-color: var(--blue);
 	display: flex;
 	align-items: center;
+	justify-content: center;
 	padding: 10px 25px;
 	border: none;
 	outline: none;
 	border-radius: 20px;
 	transition: all .3s ease-in-out;
-
 }
 
 .icon {
-	font-size: 27px;
+	font-size: 25px;
 	color: var(--white);
 	transition: all .3s ease-in-out;
 }
 
 .text {
-	font-size: 23px;
+	font-size: 20px;
 	margin: 0;
 	padding: 0;
 	color: var(--white);
