@@ -31,5 +31,5 @@ export const Settings = () => {
   }
 
   console.log("tokens", tokens);
-  return <SettingsPresentation />;
+  return <SettingsPresentation tokens={tokens} />;
 };

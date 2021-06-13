@@ -8,3 +8,17 @@
 	justify-content: space-evenly;
 	align-items: center;
 }
+
+.token {
+	display: flex;
+	align-items: center;
+}
+
+.token>*,
+.token__inst>* {
+	margin: 20px;
+}
+
+.token__inst {
+	margin: 0;
+}
