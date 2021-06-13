@@ -20,4 +20,31 @@ body {
   margin-left: 150px;
   background-color: var(--black);
   min-height: 100vh;
+  overflow: scroll;
+}
+
+
+html,
+body {
+  scrollbar-color: var(--blue) var(--black);
+  scrollbar-width: thin;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+  background-color: var(--black);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--blue);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-corner {
+  height: 0;
+  width: 0;
+  display: none;
 }
