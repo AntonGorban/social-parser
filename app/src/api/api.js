@@ -42,7 +42,7 @@ const api = {
     default: () => get("token/default"),
     updateVk: (data) => patch("token/vk", data),
     updateTg: (data) => patch("token/tg", data),
-    updateYoutube: (data) => patch("token/youtube", data),
+    updateYouTube: (data) => patch("token/youtube", data),
     updateInst: (data) => patch("token/inst", data),
   },
   resource: {
