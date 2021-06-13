@@ -9,20 +9,33 @@
 	align-items: center;
 	justify-content: space-evenly;
 	background-color: var(--dark);
+	box-shadow: 2px 0 2px var(--dark);
 }
 
 .link {
 	color: var(--white);
-	font-size: 18px;
+	text-align: center;
+	width: 100%;
+	font-size: 16px;
 	text-transform: uppercase;
 	text-decoration: none;
 	font-weight: 600;
-	padding-top: 60px;
-	background-position: center top;
-	background-repeat: no-repeat;
-	background-size: 40px;
+	padding: 15px;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+	transition: all .3s ease-in-out;
+}
+
+.img {
+	width: 35px;
+	height: 35px;
+	margin-bottom: 10px;
 }
 
 .active {
-	color: var(--blue);
+	background-color: var(--blue);
+	box-shadow: 1px 0 10px 1px var(--blue);
 }
