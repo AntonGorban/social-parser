@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import api from "../../api/api";
 import { SettingsPresentation } from "./SettingsPresentation";
 
@@ -26,9 +26,7 @@ export const Settings = () => {
     });
   };
 
-  if (!tokens.recd) {
-    getTokens();
-  }
+  if (!tokens.recd) getTokens();
 
   const setVk = (event) =>
     setTokens((prev) => ({ ...prev, vk: event.target.value }));
