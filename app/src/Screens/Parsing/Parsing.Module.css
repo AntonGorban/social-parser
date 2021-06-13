@@ -1,0 +1,10 @@
+.wrap {
+	height: 100vh;
+	background-color: var(--black);
+	display: flex;
+	flex-direction: column;
+	padding: 20px;
+	box-sizing: border-box;
+	justify-content: space-evenly;
+	align-items: center;
+}
