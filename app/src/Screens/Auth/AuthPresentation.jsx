@@ -16,7 +16,7 @@ export const AuthPresentation = ({
   login,
 }) => {
   let history = useHistory();
-  // if (user.auth) history.push("/home");
+  if (user.auth) history.push("/resources");
   return (
     <div className={classes.wrap}>
       <h2 className={classes.title}>{user.isLogin ? "Вход" : "Регистрация"}</h2>
