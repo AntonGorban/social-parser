@@ -11,12 +11,12 @@ const Td = ({ data, info }) => (
   </td>
 );
 
-export const ParsingPresentation = ({ resources }) => {
+export const ParsingPresentation = ({ resources, startParsing }) => {
   return (
     <div className={`container ${classes.wrap}`}>
       <h1>Парсинг</h1>
       <div className={classes.buttons}>
-        <Button text="Спарсить" icon="fas fa-bolt" onClick={null} />
+        <Button text="Спарсить" icon="fas fa-bolt" onClick={startParsing} />
         <Button text="Сохранить" icon="fas fa-save" onClick={null} />
       </div>
       <table className={classes.table}>
