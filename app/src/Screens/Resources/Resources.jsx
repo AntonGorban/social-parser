@@ -196,6 +196,17 @@ export const Resources = () => {
         tw: resource.id === id ? tw.target.value : resource.tw,
       })),
     }));
+
+  const updateSavedResource = async (id) => {
+    await api.resource
+      .update(
+        id,
+        ...resources.savedResources.filter((resource) => id === resource.id)
+      )
+      .catch((error) => console.error(error));
+    getResources();
+  };
+
   console.log(resources);
   return (
     <ResourcesPresentation
@@ -218,6 +229,7 @@ export const Resources = () => {
       updateOkSavedResource={updateOkSavedResource}
       updateInstSavedResource={updateInstSavedResource}
       updateTwSavedResource={updateTwSavedResource}
+      updateSavedResource={updateSavedResource}
     />
   );
 };

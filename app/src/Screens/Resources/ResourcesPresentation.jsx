@@ -25,6 +25,7 @@ export const ResourcesPresentation = ({
   updateOkSavedResource,
   updateInstSavedResource,
   updateTwSavedResource,
+  updateSavedResource,
 }) => {
   return (
     <div className={`container ${classes.wrap}`}>
@@ -126,7 +127,7 @@ export const ResourcesPresentation = ({
           <Button
             text="Сохранить изменения"
             icon="fas fa-pencil-alt"
-            onClick={null}
+            onClick={() => updateSavedResource(resource.id)}
           />
         </div>
       ))}
