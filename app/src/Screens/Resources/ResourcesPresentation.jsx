@@ -5,7 +5,18 @@ import { Error } from "../../Components/Error/Error";
 import { Input } from "../../Components/Input/Input";
 import { Button } from "../../Components/Button/Button";
 
-export const ResourcesPresentation = ({ resources, newResource }) => {
+export const ResourcesPresentation = ({
+  resources,
+  newResource,
+  updateNameNewResource,
+  updateUrlNewResource,
+  updateVkNewResource,
+  updateTgNewResource,
+  updateYouTubeNewResource,
+  updateOkNewResource,
+  updateInstNewResource,
+  updateTwNewResource,
+}) => {
   return (
     <div className={`container ${classes.wrap}`}>
       <h1>Ресурсы</h1>
@@ -15,42 +26,42 @@ export const ResourcesPresentation = ({ resources, newResource }) => {
           <Input
             value={newResource.name}
             placeholder={"Название"}
-            onChange={null}
+            onChange={updateNameNewResource}
           />
           <Input
             value={newResource.url}
             placeholder={"URL-адрес"}
-            onChange={null}
+            onChange={updateUrlNewResource}
           />
           <Input
             value={newResource.vk}
             placeholder={"ВКонтакте"}
-            onChange={null}
+            onChange={updateVkNewResource}
           />
           <Input
             value={newResource.tg}
             placeholder={"Telegram"}
-            onChange={null}
+            onChange={updateTgNewResource}
           />
           <Input
             value={newResource.youTube}
             placeholder={"YouTube"}
-            onChange={null}
+            onChange={updateYouTubeNewResource}
           />
           <Input
             value={newResource.ok}
             placeholder={"Одноклассники"}
-            onChange={null}
+            onChange={updateOkNewResource}
           />
           <Input
             value={newResource.inst}
             placeholder={"Instagram"}
-            onChange={null}
+            onChange={updateInstNewResource}
           />
           <Input
             value={newResource.tw}
             placeholder={"Twitter"}
-            onChange={null}
+            onChange={updateTwNewResource}
           />
         </div>
         <Button text="Добавить" icon="fas fa-plus" onClick={null} />

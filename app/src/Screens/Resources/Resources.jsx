@@ -54,11 +54,91 @@ export const Resources = () => {
 
   if (!resources.recd) getResources();
 
+  const updateNameNewResource = (name) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        name: name.target.value,
+      },
+    }));
+  const updateUrlNewResource = (url) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        url: url.target.value,
+      },
+    }));
+  const updateVkNewResource = (vk) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        vk: vk.target.value,
+      },
+    }));
+  const updateTgNewResource = (tg) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        tg: tg.target.value,
+      },
+    }));
+  const updateYouTubeNewResource = (youTube) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        youTube: youTube.target.value,
+      },
+    }));
+  const updateOkNewResource = (ok) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        ok: ok.target.value,
+      },
+    }));
+  const updateInstNewResource = (inst) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        inst: inst.target.value,
+      },
+    }));
+  const updateTwNewResource = (tw) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        tw: tw.target.value,
+      },
+    }));
+  const setErrorNewResource = (error) =>
+    setResources((prev) => ({
+      ...prev,
+      newResource: {
+        ...prev.newResource,
+        error: error,
+      },
+    }));
   console.log(resources);
   return (
     <ResourcesPresentation
       resources={resources.savedResources}
       newResource={resources.newResource}
+      updateNameNewResource={updateNameNewResource}
+      updateUrlNewResource={updateUrlNewResource}
+      updateVkNewResource={updateVkNewResource}
+      updateTgNewResource={updateTgNewResource}
+      updateYouTubeNewResource={updateYouTubeNewResource}
+      updateOkNewResource={updateOkNewResource}
+      updateInstNewResource={updateInstNewResource}
+      updateTwNewResource={updateTwNewResource}
     />
   );
 };
