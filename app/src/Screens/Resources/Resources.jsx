@@ -126,6 +126,11 @@ export const Resources = () => {
         error: error,
       },
     }));
+
+  const saveNewResource = async () => {
+    await api.resource.create(resources.newResource);
+    getResources();
+  };
   console.log(resources);
   return (
     <ResourcesPresentation
@@ -139,6 +144,7 @@ export const Resources = () => {
       updateOkNewResource={updateOkNewResource}
       updateInstNewResource={updateInstNewResource}
       updateTwNewResource={updateTwNewResource}
+      saveNewResource={saveNewResource}
     />
   );
 };

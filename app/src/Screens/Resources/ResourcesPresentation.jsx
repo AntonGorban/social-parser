@@ -16,6 +16,7 @@ export const ResourcesPresentation = ({
   updateOkNewResource,
   updateInstNewResource,
   updateTwNewResource,
+  saveNewResource,
 }) => {
   return (
     <div className={`container ${classes.wrap}`}>
@@ -64,7 +65,7 @@ export const ResourcesPresentation = ({
             onChange={updateTwNewResource}
           />
         </div>
-        <Button text="Добавить" icon="fas fa-plus" onClick={null} />
+        <Button text="Добавить" icon="fas fa-plus" onClick={saveNewResource} />
       </div>
 
       <h2>Ваши ресурсы</h2>
