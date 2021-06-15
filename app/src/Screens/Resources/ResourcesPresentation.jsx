@@ -17,6 +17,14 @@ export const ResourcesPresentation = ({
   updateInstNewResource,
   updateTwNewResource,
   saveNewResource,
+  updateNameSavedResource,
+  updateUrlSavedResource,
+  updateVkSavedResource,
+  updateTgSavedResource,
+  updateYouTubeSavedResource,
+  updateOkSavedResource,
+  updateInstSavedResource,
+  updateTwSavedResource,
 }) => {
   return (
     <div className={`container ${classes.wrap}`}>
@@ -75,42 +83,44 @@ export const ResourcesPresentation = ({
             <Input
               value={resource.name}
               placeholder={"Название"}
-              onChange={null}
+              onChange={(event) => updateNameSavedResource(resource.id, event)}
             />
             <Input
               value={resource.url}
               placeholder={"URL-адрес"}
-              onChange={null}
+              onChange={(event) => updateUrlSavedResource(resource.id, event)}
             />
             <Input
               value={resource.vk}
               placeholder={"ВКонтакте"}
-              onChange={null}
+              onChange={(event) => updateVkSavedResource(resource.id, event)}
             />
             <Input
               value={resource.tg}
               placeholder={"Telegram"}
-              onChange={null}
+              onChange={(event) => updateTgSavedResource(resource.id, event)}
             />
             <Input
               value={resource.youTube}
               placeholder={"YouTube"}
-              onChange={null}
+              onChange={(event) =>
+                updateYouTubeSavedResource(resource.id, event)
+              }
             />
             <Input
               value={resource.ok}
               placeholder={"Одноклассники"}
-              onChange={null}
+              onChange={(event) => updateOkSavedResource(resource.id, event)}
             />
             <Input
               value={resource.inst}
               placeholder={"Instagram"}
-              onChange={null}
+              onChange={(event) => updateInstSavedResource(resource.id, event)}
             />
             <Input
               value={resource.tw}
               placeholder={"Twitter"}
-              onChange={null}
+              onChange={(event) => updateTwSavedResource(resource.id, event)}
             />
           </div>
           <Button
