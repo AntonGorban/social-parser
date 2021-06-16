@@ -54,7 +54,8 @@ const api = {
   parse: {
     get: () => get("parse/"),
     getById: (id) => get(`parse/${id}`),
-    create: (data) => get("parse/", data),
+    create: (data) => post("parse/", data),
+    start: (data) => post("parse/start", data),
   },
   parseUrl: {
     get: () => get("parse-url/"),

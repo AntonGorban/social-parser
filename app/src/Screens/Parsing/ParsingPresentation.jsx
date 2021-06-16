@@ -7,17 +7,32 @@ import { Button } from "../../Components/Button/Button";
 
 const Td = ({ data, info }) => (
   <td className={`${classes.col} ${!info && classes.col_none}`}>
-    {info && (data || "\u2015")}
+    {info &&
+      (data === null
+        ? "\u2015"
+        : String(data)
+            .split("")
+            .reverse()
+            .join("")
+            .match(/.{1,3}/g)
+            .join(" ")
+            .split("")
+            .reverse()
+            .join(""))}
   </td>
 );
 
-export const ParsingPresentation = ({ resources, startParsing }) => {
+export const ParsingPresentation = ({
+  resources,
+  startParsing,
+  saveResults,
+}) => {
   return (
     <div className={`container ${classes.wrap}`}>
       <h1>Парсинг</h1>
       <div className={classes.buttons}>
         <Button text="Спарсить" icon="fas fa-bolt" onClick={startParsing} />
-        <Button text="Сохранить" icon="fas fa-save" onClick={null} />
+        <Button text="Сохранить" icon="fas fa-save" onClick={saveResults} />
       </div>
       <table className={classes.table}>
         <thead className={classes.header}>
