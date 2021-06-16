@@ -15,7 +15,6 @@ export class Auth extends React.Component {
   setIsLoginFalse = () => this.props.setIsLogin(false);
 
   async componentDidMount() {
-    console.log("sdfsf");
     let token = window.localStorage.getItem("token") || null;
     if (token) {
       api.apiToken = token;

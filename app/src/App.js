@@ -1,6 +1,6 @@
 import classes from "./App.Module.css";
 
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route, Redirect, useHistory } from "react-router-dom";
 import { Nav } from "./Components/Nav/Nav";
 
 import { AuthContainer } from "./Screens/Auth/AuthContainer";
@@ -9,7 +9,10 @@ import { Settings } from "./Screens/Settings/Settings";
 import { Parsing } from "./Screens/Parsing/Parsing";
 import { Stats } from "./Screens/Stats/Stats";
 
-function App({ isAuth }) {
+function App({ isAuth, setAuth }) {
+  const history = useHistory();
+  console.log(isAuth);
+  !isAuth && history.push("/auth");
   return (
     <div>
       {isAuth ? <Nav /> : ""}
