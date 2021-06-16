@@ -6,8 +6,12 @@ import { Input } from "../../Components/Input/Input";
 import { Button } from "../../Components/Button/Button";
 
 const Td = ({ data }) => (
-  <td className={`${classes.col} ${data === null && classes.col_none}`}>
-    {data !== null
+  <td
+    className={`${classes.col} ${
+      (data === null || data === undefined) && classes.col_none
+    }`}
+  >
+    {data !== null && data !== undefined
       ? String(data)
           .split("")
           .reverse()
@@ -120,8 +124,8 @@ export const StatsPresentation = ({ resources }) => {
                   <Td data={data.monthVisitors} />
                   <Td data={data.vk} />
                   <Td data={data.tg} />
-                  <Td data={data.youTubeSubscribers} />
-                  <Td data={data.youTubeViews} />
+                  <Td data={data.youtubeSubs} />
+                  <Td data={data.youtubeViews} />
                   <Td data={data.ok} />
                   <Td data={data.inst} />
                   <Td data={data.tw} />

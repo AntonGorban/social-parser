@@ -46,50 +46,38 @@ export const Stats = () => {
           },
         ],
       },
-      {
+
+  const getData = async () => {
+    let data = [];
+    const response = await api.parse.get();
+    const resources = await api.resource.get();
+    data = {
+      resources: resources.data.map((resource) => ({
         info: {
-          id: 6,
-          name: "Народный совет",
-          url: "https://dnrsovet.su",
-        },
-        data: [
-          {
-            date: "2021-05-10T11:30:07.353Z",
-            dayViews: 3600,
-            dayVisitors: 1980,
-            weekViews: 25200,
-            weekVisitors: 13300,
-            monthViews: 112000,
-            monthVisitors: 61300,
-            vk: 12464,
-            tg: 1787,
-            youTubeSubscribers: 0,
-            youTubeViews: 144551,
-            ok: 1986,
-            inst: 1144,
-            tw: 3117,
-          },
-          {
-            date: "2021-06-10T11:30:07.353Z",
-            dayViews: 3580,
-            dayVisitors: 1960,
-            weekViews: 25170,
-            weekVisitors: 13290,
-            monthViews: 111870,
-            monthVisitors: 61300,
-            vk: 12457,
-            tg: 1756,
-            youTubeSubscribers: 0,
-            youTubeViews: 144532,
-            ok: 1973,
-            inst: 1119,
-            tw: 3103,
-          },
-        ],
+          id: resource.id,
+          name: resource.name,
+          url: resource.url,
       },
-    ],
-    recd: false,
+      })),
+      recd: true,
+    };
+    data.resources.forEach((resource, id) => {
+      data.resources[id].data = [
+        ...response.data.map((parse) => ({
+          date: parse.createdAt,
+          ...parse.data.filter(
+            (info) => info.resourceId === resource.info.id
+          )[0],
+        })),
+      ];
   });
+    setData(data);
+    console.log(data);
+  };
+
+  if (!data.recd) getData();
+
+  console.log("data", data);
 
   return <StatsPresentation resources={data.resources} />;
 };
