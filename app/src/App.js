@@ -15,7 +15,7 @@ function App({ isAuth, setAuth }) {
   !isAuth && history.push("/auth");
   return (
     <div>
-      {isAuth ? <Nav /> : ""}
+      {isAuth ? <Nav setAuth={setAuth} /> : ""}
       <Switch>
         <Route exact path="/settings" component={Settings} />
         <Route exact path="/resources" component={Resources} />

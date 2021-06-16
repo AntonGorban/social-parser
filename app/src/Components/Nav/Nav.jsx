@@ -6,8 +6,9 @@ import settingsIcon from "../../img/cogs-solid.svg";
 import resourcesIcon from "../../img/atlas-solid.svg";
 import parsingIcon from "../../img/bolt-solid.svg";
 import statsIcon from "../../img/chart-line-solid.svg";
+import exitIcon from "../../img/door-open-solid.svg";
 
-export const Nav = () => {
+export const Nav = ({ setAuth }) => {
   return (
     <div className={classes.wrap}>
       <NavLink
@@ -46,6 +47,16 @@ export const Nav = () => {
         <img src={statsIcon} alt="" className={classes.img} />
         Статистика
       </NavLink>
+      <div
+        className={classes.link}
+        onClick={() => {
+          window.localStorage.removeItem("token");
+          setAuth(false);
+        }}
+      >
+        <img src={exitIcon} alt="" className={classes.img} />
+        Выход
+      </div>
     </div>
   );
 };
