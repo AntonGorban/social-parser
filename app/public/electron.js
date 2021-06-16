@@ -24,10 +24,10 @@ if (require("electron-squirrel-startup")) {
 function createWindow() {
   // Create the browser window.
   const win = new BrowserWindow({
-    minWidth: 800,
-    minHeight: 400,
+    minWidth: 1024,
+    minHeight: 600,
     width: 1024,
-    height: 600,
+    height: 650,
     backgroundColor: "#1d1d1d",
     autoHideMenuBar: true,
     webPreferences: {

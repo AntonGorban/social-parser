@@ -1,6 +1,6 @@
 {
   "name": "social-parser",
-  "productName": "social parser",
+  "productName": "P",
   "version": "3.0.0",
   "main": "public/electron.js",
   "description": "Shows the metric of site visits and metrics from VK, Telegram, YouTube, Ok, Instagram and Twitter",
@@ -79,11 +79,10 @@
     "forge": {
       "packagerConfig": {
         "icon": "src/icons/win/icon.ico",
-        "name": "Social parser",
+        "name": "Social Parser",
         "asar": true
       },
-      "makers": [
-        {
+      "makers": [{
           "name": "@electron-forge/maker-squirrel",
           "config": {
             "name": "app"
